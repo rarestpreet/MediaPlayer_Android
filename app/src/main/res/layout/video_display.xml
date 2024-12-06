@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/videoimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/videoname"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:text="Video Name"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:paddingStart="10dp"/>
+
+        <TextView
+            android:id="@+id/videotime"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:text="time"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:paddingStart="10dp"/>
+    </LinearLayout>
+</LinearLayout>

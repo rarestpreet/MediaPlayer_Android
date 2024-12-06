@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/musicbtn"
+        android:icon="@drawable/baseline_library_music_24"
+        android:contentDescription="musicplayer"
+        android:title="Music Player"/>
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+    <item
+        android:id="@+id/videobtn"
+        android:icon="@drawable/baseline_video_library_24"
+        android:contentDescription="videoplayer"
+        android:title="Video Player"/>
+</menu>

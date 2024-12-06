@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "315527050606",
+    "project_id": "mymediaplayer-cf071",
+    "storage_bucket": "mymediaplayer-cf071.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315527050606:android:0bfc2a9975fd91f4b93d7f",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBys5KIrXVZnFsFgBZ1RH29olAwXsj1eDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

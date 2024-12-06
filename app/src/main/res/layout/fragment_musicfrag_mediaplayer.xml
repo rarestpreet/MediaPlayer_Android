@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".musicfrag_mediaplayer"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/poster_musicplayer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:contentDescription="musicimage"
+            android:src="@drawable/logo_mediaplayer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/currposter_musicplayer"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/audio6"
+            app:layout_constraintBottom_toBottomOf="@+id/poster_musicplayer"
+            app:layout_constraintEnd_toEndOf="@+id/poster_musicplayer"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@id/poster_musicplayer"
+            app:layout_constraintTop_toTopOf="@+id/poster_musicplayer"
+            app:layout_constraintVertical_bias="0.48" />
+
+        <TextView
+            android:id="@+id/currname_musicplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Step Back"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poster_musicplayer" />
+
+        <SeekBar
+            android:id="@+id/seekBar_musicplayer"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="0"
+            android:progressBackgroundTint="@color/black"
+            android:progressTint="@color/purple_200"
+            android:thumbTint="@color/purple_200"
+            app:layout_constraintTop_toBottomOf="@+id/currname_musicplayer"
+            tools:layout_editor_absoluteX="2dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@integer/material_motion_duration_long_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar_musicplayer">
+
+            <ImageView
+                android:id="@+id/prev_musicplayer"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/purple_200"
+                android:clickable="true"
+                android:contentDescription="@string/previous"
+                android:focusable="true"
+                android:src="@drawable/baseline_skip_previous_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/play_musicplayer"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <ImageView
+                android:id="@+id/play_musicplayer"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/purple_200"
+                android:clickable="true"
+                android:contentDescription="@string/play"
+                android:focusable="true"
+                android:src="@drawable/baseline_play_arrow_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/next_musicplayer"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/prev_musicplayer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/next_musicplayer"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/circle"
+                android:backgroundTint="@color/purple_200"
+                android:clickable="true"
+                android:contentDescription="@string/next"
+                android:focusable="true"
+                android:src="@drawable/baseline_skip_next_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/play_musicplayer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="prev_musicplayer,play_musicplayer,next_musicplayer" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/intro_musicplayer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/purple_200"
+            android:gravity="center"
+            android:text="Select Your Music"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/musiclist_musicplayer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/intro_musicplayer"
+
+            tools:listitem="@layout/music_display" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

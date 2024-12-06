@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define a custom theme for ActionBar -->
+    <style name="CustomActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">@color/black</item> <!-- Set the title text color here -->
+        <item name="android:background">#B17BFD</item> <!-- Optional background color -->
+    </style>
+    <!-- Base application theme. -->
+    <style name="Theme.MyApplication" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Fab_Bottom_app_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#0F9D58</item>
+        <item name="colorPrimaryVariant">#0F9D58</item>
+        <item name="colorOnPrimary">#000</item>
+    </style>
+</resources>

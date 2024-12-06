@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.example.myapplication.homepage_mediaplayer">
+
+    <!-- Toolbar -->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_mediaplayer"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:theme="@style/CustomActionBarTheme"
+        android:title="My App"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Fragment Container -->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragview_mediaplayer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navview_mediaplayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_mediaplayer"
+        android:name="com.example.myapplication.musicfrag_mediaplayer"/>
+
+    <!-- Bottom Navigation View -->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/closebtn_mediaplayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#B075F3"
+        android:contentDescription="close"
+        android:elevation="16dp"
+        android:src="@drawable/baseline_close_24"
+        android:translationZ="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragview_mediaplayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragview_mediaplayer" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navview_mediaplayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_200"
+        android:elevation="-16dp"
+        android:translationZ="-16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/mediaplayer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
