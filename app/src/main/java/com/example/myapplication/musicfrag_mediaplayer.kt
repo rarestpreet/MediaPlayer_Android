@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.FragmentMusicfragMediaplayerBinding
 
 class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) {
-    private var mediaPlayer: MediaPlayer? = null
+    private lateinit var mediaPlayer: MediaPlayer
     private val musiclist = ArrayList<music_data>()
     private lateinit var binding: FragmentMusicfragMediaplayerBinding
     private var currentMusic = 0
@@ -29,23 +30,23 @@ class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) 
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMusicfragMediaplayerBinding.inflate(inflater, container, false)
-
+        mediaPlayer= MediaPlayer()
         // Button listeners
         binding.playMusicplayer.setOnClickListener {
-            if (mediaPlayer?.isPlaying == true) {
-                mediaPlayer?.pause()
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.pause()
                 binding.playMusicplayer.setImageResource(R.drawable.baseline_play_arrow_24)
                 pauseAnimator()
             } else {
-                mediaPlayer?.start()
+                mediaPlayer.start()
                 binding.playMusicplayer.setImageResource(R.drawable.baseline_pause_24)
                 startAnimator()
             }
         }
 
         binding.prevMusicplayer.setOnClickListener {
-            if (mediaPlayer?.isPlaying == true) {
-                mediaPlayer?.stop()
+            if (mediaPlayer.isPlaying) {
+                mediaPlayer.stop()
             }
             currentMusic = if (currentMusic > 0) currentMusic - 1 else musiclist.size - 1
             playMusic(currentMusic)
@@ -53,7 +54,7 @@ class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) 
         }
 
         binding.nextMusicplayer.setOnClickListener {
-            mediaPlayer?.stop()
+            mediaPlayer.stop()
             currentMusic = (currentMusic + 1) % musiclist.size
             playMusic(currentMusic)
             binding.currposterMusicplayer.setImageResource(musiclist[currentMusic].music_img)
@@ -62,10 +63,10 @@ class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) 
         // SeekBar listener
         binding.seekBarMusicplayer.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             var progressChangedValue = 0
-            var maxTime=mediaPlayer?.duration
+            var maxTime=mediaPlayer.duration
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if(fromUser){
-                    mediaPlayer?.seekTo(progress)
+                    mediaPlayer.seekTo(progress)
                 }
             }
 
@@ -74,19 +75,29 @@ class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        val handler= Handler()
-        handler.postDelayed(object :Runnable{
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
             override fun run() {
-                binding.seekBarMusicplayer.progress= mediaPlayer?.currentPosition!!
-                handler.postDelayed(this,1000)
-                binding.seekBarMusicplayer.max= mediaPlayer?.duration!!
-                if(binding.seekBarMusicplayer.progress==binding.seekBarMusicplayer.max){
-                    currentMusic=(currentMusic+1)%musiclist.size
-                    playMusic(currentMusic)
+                try {
+                    mediaPlayer.let { player ->
+                        if (player.isPlaying) {
+                            binding.seekBarMusicplayer.progress = player.currentPosition
+                            binding.seekBarMusicplayer.max = player.duration
+                        }
+                        if (binding.seekBarMusicplayer.progress == binding.seekBarMusicplayer.max) {
+                            currentMusic = (currentMusic + 1) % musiclist.size
+                            playMusic(currentMusic)
+                        }
+                    }
+                } catch (e: IllegalStateException) {
+                    e.printStackTrace()
+                } catch (e: NullPointerException) {
+                    e.printStackTrace()
                 }
+                handler.postDelayed(this, 1000)
             }
+        }, 0)
 
-        },0)
 
         // setting the data for music
         val musicname = arrayOf("Dancing In My Room", "Samjho Na", "Suniya Suniya", "Viva La Vida", "Me And The Devil","Step Back")
@@ -95,7 +106,7 @@ class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) 
 
         for (i in musicname.indices) {
             mediaPlayer= MediaPlayer.create(requireContext(), musicurl[i])
-            var musictime= mediaPlayer?.duration?.toInt()
+            var musictime= mediaPlayer.duration.toInt()
             musiclist.add(music_data(musicname[i], formatDuration(musictime), musicimage[i], musicurl[i]))
         }
 
@@ -131,7 +142,7 @@ class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) 
     }
 
     private fun playMusic(currentMusic: Int) {
-        mediaPlayer?.release() // Release the previous instance if any
+        mediaPlayer.release() // Release the previous instance if any
         val resId = musiclist[currentMusic].music_uri
         binding.playMusicplayer.setImageResource(R.drawable.baseline_pause_24)
         mediaPlayer = MediaPlayer.create(requireContext(), resId).apply {
@@ -155,7 +166,6 @@ class musicfrag_mediaplayer : Fragment(R.layout.fragment_musicfrag_mediaplayer) 
     }
     override fun onDestroyView() {
         super.onDestroyView()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        mediaPlayer.release()
     }
 }
